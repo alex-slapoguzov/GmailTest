@@ -30,33 +30,51 @@ public class MailGoogleCom {
     @FindBy(xpath = "//a[@href=\"https://mail.google.com/mail/u/0/?tab=wm#inbox\"]")
     private WebElement inboxButton;
 
+    @FindBy(xpath = "//tbody/tr[1]/td[@id = \":xq\"]")
+    private WebElement firstInboxLetter;
 
-    private void clickWritteButton(){
+    @FindBy(xpath = "//div[@class=\"adn ads\"]//div[@dir=\"ltr\"]")
+    private WebElement bodyOfLetter;
+
+
+    public void clickWritteButton(){
         writteButton.click();
     }
 
-    private void typeEmailInWhomField(){
+    public void typeEmailInWhomField(String email){
         toWhomField.clear();
-        toWhomField.sendKeys("IvanovTestEmail@gmail.com");
+        toWhomField.sendKeys(email);
     }
 
-    private void typeTextInSubjectLetterField(String text){
-        text = "Hello, World!";
+    public void typeTextInSubjectLetterField(String text){
         bodyOfTheLetterField.sendKeys(text);
     }
 
-    private void clickSendButton(){
+    public void clickSendButton(){
         sendButton.click();
 
     }
 
-    private void clickInboxButton(){
+    public void clickInboxButton(){
         inboxButton.click();
     }
 
+    public String getInboxButtonName(){
+        System.out.println(inboxButton.getText());
+       return inboxButton.getText();
+    }
 
+    public void openFirstInboxLetter(){
+        firstInboxLetter.click();
+    }
+
+    public String getTextFromLetter(){
+        return bodyOfLetter.getText();
 
     }
+
+
+  }
 
 
 

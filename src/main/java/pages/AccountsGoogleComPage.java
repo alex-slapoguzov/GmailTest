@@ -21,18 +21,29 @@ public class AccountsGoogleComPage {
     private WebElement nextButton;
 
 
-    private void typeEmailUserField(){
+    public void typeEmailUserField(String email){
         emailUserField.clear();
         emailUserField.sendKeys("IvanovTestEmail@gmail.com");
     }
 
-    private void typePasswordField(){
+    public void typePasswordField(String password){
         passwordUserField.clear();
         passwordUserField.sendKeys("Qwerty123456");
     }
 
-    private void clickNextButton(){
+    public void clickNextButton(){
         nextButton.click();
     }
 
+
+    public MailGoogleCom login(String email, String password){
+        typeEmailUserField(email);
+        clickNextButton();
+        typePasswordField(password);
+        clickNextButton();
+        return new MailGoogleCom(driver);
+     }
+
 }
+
+

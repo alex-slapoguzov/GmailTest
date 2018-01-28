@@ -17,8 +17,9 @@ public class GoogleComPage {
 
 
 
-        private void clickMailButton(){
+        public AccountsGoogleComPage clickMailButton(){
             emailButton.click();
+            return new AccountsGoogleComPage(driver);
         }
 
     }
