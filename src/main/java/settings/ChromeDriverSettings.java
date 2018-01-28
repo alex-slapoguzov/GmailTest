@@ -13,28 +13,23 @@ public class ChromeDriverSettings {
     protected String userEmail = "IvanovTestEmail@gmail.com";
     protected String userPassword = "Qwerty123456";
     protected String textLetter = "Hello, World!";
-    protected String currentTextInboxButton;
-    protected String textInboxButtonAfterSending;
+
 
 
 
     @BeforeMethod
-
     public void setUp(){
         driver = new ChromeDriver();
         driver.get("https://www.google.com");
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-
+      driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
 
     @AfterMethod
-
     public void setAfter(){
         driver.quit();
-    }
-
+   }
 
 }
 

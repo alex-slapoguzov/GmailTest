@@ -1,3 +1,5 @@
+package gmailTests;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.AccountsGoogleComPage;
@@ -8,13 +10,20 @@ import settings.ChromeDriverSettings;
 public class InputLetterTest extends ChromeDriverSettings {
 
     @Test
-    public void incomingLetterTest() throws NullPointerException {
-        System.out.println("0. Start test");
+    public void incomingLetterTest() throws InterruptedException {
+
+        String currentTextInboxButton;
+        String textInboxButtonAfterSending;
+
         GoogleComPage googleComPage = new GoogleComPage(driver);
-        System.out.println("1. After new googleComPage");
+
         AccountsGoogleComPage accountsGoogleComPage = googleComPage.clickMailButton();
-        System.out.println("2. After clickMailButton");
-        MailGoogleCom mailGoogleCom = accountsGoogleComPage.login(userEmail, userPassword);
+        accountsGoogleComPage.typeEmailUserField(userEmail);
+        accountsGoogleComPage.clickNextButton();
+        Thread.sleep(5000);
+        accountsGoogleComPage.typePasswordField(userPassword);
+
+        MailGoogleCom mailGoogleCom = accountsGoogleComPage.clickNextButtonAndGoToNextPage();
         mailGoogleCom.clickInboxButton();
 
         currentTextInboxButton = mailGoogleCom.getInboxButtonName();
@@ -24,14 +33,15 @@ public class InputLetterTest extends ChromeDriverSettings {
         mailGoogleCom.typeTextInSubjectLetterField(textLetter);
         mailGoogleCom.clickSendButton();
         mailGoogleCom.clickInboxButton();
-
+        Thread.sleep(5000);
         textInboxButtonAfterSending = mailGoogleCom.getInboxButtonName();
 
-        Assert.assertEquals("New letter didn't receive", currentTextInboxButton, textInboxButtonAfterSending);
+
+        Assert.assertNotEquals(textInboxButtonAfterSending, currentTextInboxButton,"New letter didn't receive");
 
         mailGoogleCom.openFirstInboxLetter();
 
-        Assert.assertEquals("'Hello world' isn't in the letter", textLetter, mailGoogleCom.getTextFromLetter());
+        Assert.assertEquals(textLetter, mailGoogleCom.getTextFromLetter(), "'Hello world' isn't in the letter");
 
     }
 

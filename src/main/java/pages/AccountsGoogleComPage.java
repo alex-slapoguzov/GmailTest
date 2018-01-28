@@ -1,48 +1,46 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+
 
 public class AccountsGoogleComPage {
 
-   private WebDriver driver;
-   public AccountsGoogleComPage(WebDriver driver){
-       this.driver = driver;
-   }
+    private WebDriver driver;
+    public AccountsGoogleComPage(WebDriver driver){
+        this.driver = driver;
+    }
 
-    @FindBy(xpath = "//div/input[@id=\"identifierId\"]")
-    private WebElement emailUserField;
-
-    @FindBy(xpath = "//input[@name = \"password\"]")
-    private WebElement passwordUserField;
-
-    @FindBy(xpath = "//content/span[@class=\"RveJvd snByac\"]")
-    private WebElement nextButton;
+    By emailUserField = By.xpath("//div/input[@id=\"identifierId\"]");
+    By passwordUserField = By.xpath("//input[@type=\"password\"]");
+    By nextButton = By.xpath("//content/span[@class=\"RveJvd snByac\"]");
 
 
     public void typeEmailUserField(String email){
-        emailUserField.clear();
-        emailUserField.sendKeys("IvanovTestEmail@gmail.com");
+       WebElement field = driver.findElement(emailUserField);
+       field.click();
+       field.clear();
+       field.sendKeys(email);
     }
 
     public void typePasswordField(String password){
-        passwordUserField.clear();
-        passwordUserField.sendKeys("Qwerty123456");
+        WebElement field = driver.findElement(passwordUserField);
+        field.click();
+        field.clear();
+        field.sendKeys(password);
     }
 
     public void clickNextButton(){
-        nextButton.click();
+        driver.findElement(nextButton).click();
     }
 
 
-    public MailGoogleCom login(String email, String password){
-        typeEmailUserField(email);
-        clickNextButton();
-        typePasswordField(password);
-        clickNextButton();
+    public MailGoogleCom clickNextButtonAndGoToNextPage(){
+        driver.findElement(nextButton).click();
         return new MailGoogleCom(driver);
-     }
+    }
+
 
 }
 

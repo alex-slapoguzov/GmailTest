@@ -1,8 +1,9 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+
+
 
 public class GoogleComPage {
 
@@ -11,16 +12,15 @@ public class GoogleComPage {
     public GoogleComPage(WebDriver driver){this.driver = driver;}
 
 
-
-        @FindBy(xpath = "//div/a[@href=\"https://mail.google.com/mail/?tab=wm\"]")
-        private WebElement emailButton;
+    By emailButton = By.xpath("//div/a[@href=\"https://mail.google.com/mail/?tab=wm\"]");
 
 
 
-        public AccountsGoogleComPage clickMailButton(){
-            emailButton.click();
-            return new AccountsGoogleComPage(driver);
-        }
 
+    public AccountsGoogleComPage clickMailButton(){
+        driver.findElement(emailButton).click();
+        return new AccountsGoogleComPage(driver);
     }
+
+}
 
