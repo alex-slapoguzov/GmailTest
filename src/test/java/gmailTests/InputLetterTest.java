@@ -16,13 +16,10 @@ public class InputLetterTest extends ChromeDriverSettings {
         String textInboxButtonAfterSending;
 
         GoogleComPage googleComPage = new GoogleComPage(driver);
-
         AccountsGoogleComPage accountsGoogleComPage = googleComPage.clickMailButton();
         accountsGoogleComPage.typeEmailUserField(userEmail);
         accountsGoogleComPage.clickNextButton();
-        Thread.sleep(5000);
         accountsGoogleComPage.typePasswordField(userPassword);
-
         MailGoogleCom mailGoogleCom = accountsGoogleComPage.clickNextButtonAndGoToNextPage();
         mailGoogleCom.clickInboxButton();
 
@@ -33,11 +30,14 @@ public class InputLetterTest extends ChromeDriverSettings {
         mailGoogleCom.typeTextInSubjectLetterField(textLetter);
         mailGoogleCom.clickSendButton();
         mailGoogleCom.clickInboxButton();
-        Thread.sleep(5000);
+        mailGoogleCom.clickSentButtonInMailPage();
+        mailGoogleCom.clickInboxButton();
+
+        //Thread.sleep(5000);
         textInboxButtonAfterSending = mailGoogleCom.getInboxButtonName();
 
 
-        Assert.assertNotEquals(textInboxButtonAfterSending, currentTextInboxButton,"New letter didn't receive");
+        Assert.assertNotEquals(textInboxButtonAfterSending, currentTextInboxButton, "New letter didn't receive");
 
         mailGoogleCom.openFirstInboxLetter();
 

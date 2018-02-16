@@ -2,34 +2,34 @@ package settings;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import java.util.concurrent.TimeUnit;
 
 public class ChromeDriverSettings {
 
     protected WebDriver driver;
+    protected WebDriverWait wait;
     protected String userEmail = "IvanovTestEmail@gmail.com";
     protected String userPassword = "Qwerty123456";
     protected String textLetter = "Hello, World!";
 
 
-
-
     @BeforeMethod
-    public void setUp(){
+    public void setUp() {
+
         driver = new ChromeDriver();
         driver.get("https://www.google.com");
         driver.manage().window().maximize();
-      driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
     }
 
 
     @AfterMethod
-    public void setAfter(){
+    public void setAfter() {
         driver.quit();
-   }
+    }
 
 }
 
