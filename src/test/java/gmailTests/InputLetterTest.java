@@ -33,7 +33,6 @@ public class InputLetterTest extends ChromeDriverSettings {
         mailGoogleCom.clickSentButtonInMailPage();
         mailGoogleCom.clickInboxButton();
 
-        //Thread.sleep(5000);
         textInboxButtonAfterSending = mailGoogleCom.getInboxButtonName();
 
 
